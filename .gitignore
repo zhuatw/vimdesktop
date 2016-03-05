@@ -27,4 +27,4 @@ Session.vim
 .netrwhist
 *~
 *.exe
-vimd.ini
+#vimd.ini
