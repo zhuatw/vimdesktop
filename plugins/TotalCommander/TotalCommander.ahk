@@ -2,6 +2,7 @@
     global TCPath
     global TCINI
     global TCMarkINI
+    global ini
 
     IniRead, TCPath, %ConfigPath%, TotalCommander_Config, TCPath
     IniRead, TCINI, %ConfigPath%, TotalCommander_Config, TCINI
@@ -70,6 +71,8 @@
     if (SaveMark <> 0)
     {
         IniRead, all_marks, %TCMarkINI%, mark, ms
+        all_marks := StrReplace(all_marks, "ERROR", "")
+
         if (all_marks <> "")
         {
             Mark["ms"] := all_marks
@@ -145,10 +148,11 @@
 
     GoSub, TCCOMMAND
 
-    vim.mode("normal", "TQUICKSEARCH")
-    vim.map("J", "<Down>", "TQUICKSEARCH")
-    vim.map("K", "<Up>", "TQUICKSEARCH")
-    ;vim.map("<esc>", "<TC_NormalMode>", "TQUICKSEARCH")
+    vim.SetWin("TCQuickSearch", "TQUICKSEARCH")
+    vim.mode("normal", "TCQuickSearch")
+    vim.map("J", "<Down>", "TCQuickSearch")
+    vim.map("K", "<Up>", "TCQuickSearch")
+    ;vim.map("<esc>", "<TC_NormalMode>", "TCQuickSearch")
 
     vim.mode("insert", "TTOTAL_CMD")
     vim.SetTimeOut(800, "TTOTAL_CMD")
@@ -233,8 +237,6 @@
     vim.map("\", "<cm_ExchangeSelection>", "TTOTAL_CMD")
     vim.map("|", "<cm_ClearAll>", "TTOTAL_CMD")
     vim.map("-", "<cm_SwitchSeparateTree>", "TTOTAL_CMD")
-    vim.map("_", "<cm_Split>", "TTOTAL_CMD")
-    vim.map("+", "<cm_Combine>", "TTOTAL_CMD")
     vim.map("=", "<cm_MatchSrc>", "TTOTAL_CMD")
     vim.map(",", "<cm_SrcThumbs>", "TTOTAL_CMD")
     vim.map(";", "<TC_ListMark>", "TTOTAL_CMD")
@@ -297,7 +299,6 @@
     vim.map("zn", "<cm_Minimize>", "TTOTAL_CMD")
     vim.map("zm", "<cm_Maximize>", "TTOTAL_CMD")
     vim.map("zr", "<cm_Restore>", "TTOTAL_CMD")
-    vim.map("zv", "<cm_VerticalPanels>", "TTOTAL_CMD")
     vim.map("zv", "<cm_VerticalPanels>", "TTOTAL_CMD")
     vim.map(".", "<Repeat>", "TTOTAL_CMD")
 
@@ -1462,8 +1463,8 @@ return
         IniWrite, WCMD_CHN.MNU, %TCINI%, Configuration, Mainmenu
         IniWrite, 0, %TCINI%, Configuration, RestrictInterface
 
-        Process, Close, totalcmd.exe
-        Process, Close, totalcmd64.exe
+        WinClose, AHK_CLASS TTOTAL_CMD
+        Sleep, 10
 
         Run, %TCPath%
         Loop, 4
@@ -1627,6 +1628,62 @@ Return
     FileMove, %FirstName%.bak, %SecondName%
 Return
 
+<Launch>:
+    launch_dir := ini.config.launch_dir
+    Run, %TCPath% %launch_dir%
+    sleep, 100
+    GoSub, <cm_DirBranch>
+    ;GoSub, <cm_ShowQuickSearch>
+return
+
+TC_OpenPath(Path, InNewTab := true, LeftOrRight := "")
+{
+    if (LeftOrRight = "")
+    {
+        LeftOrRight := "/R"
+        if Mod(LeftRight(), 2)
+        {
+            LeftOrRight := "/L"
+        }
+    }
+
+    if (InNewTab)
+    {
+        Run, "%TCPath%" /O /T /A "%LeftOrRight%"="%Path%"
+    }
+    else
+    {
+        Run, "%TCPath%" /O /A "%LeftOrRight%"="%Path%"
+    }
+}
+
+<TC_MarkFile>:
+    GoSub, <cm_EditComment>
+    ; 将备注设置为 m，可以通过将备注为 m 的文件显示成不同颜色，实现标记功能
+    ; 不要在已有备注的文件使用
+    Send, ^+{end}m{f2}
+return
+
+<TC_UnMarkFile>:
+    GoSub, <cm_EditComment>
+    ; 删除 TC_MarkFile 的文件标记，也可用于清空文件备注
+    Send, ^+{end}{del}{f2}
+return
+
+<TC_SelectCmd>:
+    OldClipboard := Clipboard
+
+    GoSub, <cm_CommandBrowser>
+    sleep 100
+    WinWaitClose, AHK_CLASS TCmdSelForm
+    if (IsLabel("<" Clipboard ">") && Clipboard <> OldClipboard)
+    {
+        GoSub, <%Clipboard%>
+    }
+
+    Clipboard := OldClipboard
+return
+
 ; ADD HERE
 
 
@@ -1684,7 +1741,7 @@ TCCOMMAND:
     vim.Comment("<cm_RightComments>", "右窗口: 显示文件备注")
     vim.Comment("<cm_RightShort>", "右窗口: 列表")
     vim.Comment("<cm_RightLong>", "详细信息")
-    vim.Comment("<cm_RightTre>", "右窗口: 文件夹树")
+    vim.Comment("<cm_RightTree>", "右窗口: 文件夹树")
     vim.Comment("<cm_RightQuickvie>", "右窗口: 快速查看")
     vim.Comment("<cm_RightQuickInternalOnl>", "右窗口: 快速查看(不用插件)")
     vim.Comment("<cm_RightHideQuickvie>", "右窗口: 关闭快速查看窗口")
@@ -2262,11 +2319,11 @@ return
 return
 ;<cm_LeftDirBranch>: >>左窗口: 展开所有文件夹{{{2
 <cm_LeftDirBranch>:
-    SendPos(203)
+    SendPos(2034)
 return
 ;<cm_LeftDirBranchSel>: >>左窗口: 只展开选中的文件夹{{{2
 <cm_LeftDirBranchSel>:
-    SendPos(204)
+    SendPos(2047)
 return
 ;<cm_LeftThumbs>: >>窗口: 缩略图{{{2
 <cm_LeftThumbs>:
@@ -2290,8 +2347,8 @@ return
 <cm_RightLong>:
     SendPos(202)
 return
-;<cm_RightTre>: >>右窗口: 文件夹树{{{2
-<cm_RightTre>:
+;<cm_RightTree>: >>右窗口: 文件夹树{{{2
+<cm_RightTree>:
     SendPos(203)
 return
 ;<cm_RightQuickvie>: >>右窗口: 快速查看{{{2

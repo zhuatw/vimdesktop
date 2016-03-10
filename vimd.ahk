@@ -30,9 +30,19 @@ act := vim.SetAction("VIMD_CMD", "VIMD_CMD_LIST")
 act.SetFunction("VIMD_CMD")
 
 global default_enable_show_info
+global editor
 default_enable_show_info := ini.config.default_enable_show_info
+editor := ini.config.editor
 
-;vim.Debug(true)
+if (ini.config.enable_log = 1)
+{
+    global log := new Logger(A_ScriptDir "\test.log")
+}
+
+if (ini.config.enable_debug = 1)
+{
+    vim.Debug(true)
+}
 
 CheckPlugin()
 CheckHotKey()
@@ -55,6 +65,28 @@ SaveVimdConfig()
 
 CheckPlugin()
 {
+    ; 检测是否有新增插件
+    Loop, %A_ScriptDir%\plugins\*, 2, 0
+    {
+        IniRead, PluginTime, %A_ScriptDir%\plugins\plugins.ahk, ExtensionsTime, %A_LoopFileName%
+        if (PluginTime = "ERROR")
+        {
+            msgbox, 发现新插件 %A_LoopFileName% ，将自动加载该插件
+
+            if (FileExist(A_ScriptDir "\vimd.exe"))
+            {
+                Run, %A_ScriptDir%\vimd.exe %A_ScriptDir%\plugins\check.ahk
+            }
+            else
+            {
+                Run, %A_ScriptDir%\plugins\check.ahk
+            }
+
+            IniWrite, 1, %ConfigPath%, plugins, %A_LoopFileName%
+            Reload
+        }
+    }
+
     global vim
     dc := GetVimdConfig()
     for plugin, bold in dc.plugins
@@ -71,21 +103,24 @@ CheckHotKey()
     {
         if not strlen(i)
             continue
-        if RegExMatch(k, "\[=[^\[\]]*\]", mode)
-        {
-            this_mode := Substr(mode, 3, strlen(mode)-3)
-            vim.Mode(this_mode)
-            this_action := RegExReplace(k, "\[=[^\[\]]*\]")
-            if RegExMatch(this_action, "^((run)|(key))\|")
-            {
-                vim.map(i, "VIMD_CMD")
-                VIMD_CMD_LIST[i] := this_action
-            }
-            else
-            {
-                vim.map(i, this_action)
-            }
 
+        this_mode := "normal"
+        this_action := k
+        if RegExMatch(this_action, "\[=[^\[\]]*\]", mode)
+        {
+            this_mode := Substr(mode, 3, strlen(mode) - 3)
+            this_action := RegExReplace(this_action, "\[=[^\[\]]*\]")
+        }
+
+        vim.Mode(this_mode)
+        if RegExMatch(this_action, "^((run)|(key)|(dir))\|")
+        {
+            vim.map(i, "VIMD_CMD")
+            VIMD_CMD_LIST[i] := this_action
+        }
+        else
+        {
+            vim.map(i, this_action)
         }
     }
 
@@ -103,9 +138,11 @@ CheckHotKey()
         win := vim.SetWin(i, k.set_class, k.set_file)
         vim.SetTimeOut(k.set_time_out, i)
         vim.SetMaxCount(k.set_Max_count, i)
-        if (k.enable_show_info = "1") {
+        if (k.enable_show_info = 1)
+        {
             win.SetInfo(true)
         }
+
 
         for m, n in k
         {
@@ -115,23 +152,30 @@ CheckHotKey()
             if RegExMatch(m, "i)(set_class)|(set_file)|(set_time_out)|(set_Max_count)|(enable_show_info)")
                 continue
 
-            if RegExMatch(n, "\[=[^\[\]]*\]", mode)
-            {
-                this_mode := Substr(mode, 3, strlen(mode)-3)
-                vim.mode(this_mode, i)
-                this_action := RegExReplace(n, "\[=[^\[\]]*\]")
-                vim.map(m, this_action, i)
-            }
-            else if RegExMatch(n, "i)^((run)|(key))\|")
-            {
-                vim.mode("normal", i)
+            this_mode := "normal"
+            this_action := n
 
+            if RegExMatch(this_action, "\[=[^\[\]]*\]", mode)
+            {
+                this_mode := Substr(mode, 3, strlen(mode) - 3)
+                this_action := RegExReplace(n, "\[=[^\[\]]*\]")
+            }
+
+            vim.mode(this_mode, i)
+
+            if RegExMatch(n, "i)^((run)|(key)|(dir))\|")
+            {
                 /*
-                <c-j> 记事本 run|notepad.exe
+                示例：
+                <c-j>=run|notepad.exe
                 */
 
                 vim.map(m, "VIMD_CMD", i)
                 VIMD_CMD_LIST[m] := n
+            }
+            else
+            {
+                vim.map(m, this_action, i)
             }
         }
     }
@@ -148,6 +192,10 @@ VIMD_CMD()
     else if RegExMatch(VIMD_CMD_LIST[obj.keytemp], "i)^(key)\|", m)
     {
         Send, % substr(VIMD_CMD_LIST[obj.keytemp], strlen(m1) + 2)
+    }
+    else if RegExMatch(VIMD_CMD_LIST[obj.keytemp], "i)^(dir)\|", m)
+    {
+        TC_OpenPath(substr(VIMD_CMD_LIST[obj.keytemp], strlen(m1) + 2), false)
     }
 }
 
@@ -192,6 +240,7 @@ RunAsAdmin()
 #Include %A_ScriptDir%\lib\acc.ahk
 #Include %A_ScriptDir%\lib\ini.ahk
 #Include %A_ScriptDir%\lib\gdip.ahk
+#Include %A_ScriptDir%\lib\Logger.ahk
 #Include %A_ScriptDir%\plugins\plugins.ahk
 ; 用户自定义配置
 #Include *i %A_ScriptDir%\custom.ahk
