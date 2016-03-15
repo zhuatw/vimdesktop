@@ -152,6 +152,7 @@
     vim.comment("<TC_UnMarkFile>", "取消文件标记，将文件注释清空")
     vim.comment("<TC_ClearTitle>", "将TC标题栏字符串设置为空")
     vim.comment("<TC_ReOpenTab>", "重新打开之前关闭的标签页")
+    vim.comment("<TC_OpenDirsInFile>", "将光标所在的文件内容中的文件夹在新标签页依次打开")
 
     GoSub, TCCOMMAND
 
@@ -1725,6 +1726,23 @@ TC_SetTitle(Title := "", KeepVersion := true)
 <TC_ReOpenTab>:
     GoSub, <cm_OpenNewTab>
     GoSub, <cm_GotoPreviousDir>
+return
+
+<TC_OpenDirsInFile>:
+    OldClipboard := Clipboard
+    Clipboard := ""
+    GoSub, <cm_CopyFullNamesToClip>
+    ClipWait
+    FileRead, Contents, %Clipboard%
+    Clipboard := OldClipboard
+    Loop, Parse, Contents, `n, `r
+    {
+        if FileExist(A_LoopField)
+        {
+            TC_OpenPath(A_LoopField, true)
+            Sleep, 100
+        }
+    }
 return
 
 ; ADD HERE
