@@ -138,13 +138,21 @@
     vim.comment("<TC_MultiFilePersistOpen>", "多个文件一次性连续打开")
     vim.comment("<TC_CopyFileContents>", "不打开文件就复制文件内容")
     vim.comment("<TC_OpenDirAndPaste>", "不打开目录，直接把复制的文件贴进去")
-    vim.comment("<TC_MoveAllFileToPrevifolder>", "将当前文件夹下的所有文件移动到上层目录中")
+    vim.comment("<TC_MoveSelectedFilesToPrevFolder>", "将当前文件夹下的选定文件移动到上层目录中")
+    vim.comment("<TC_MoveAllFilesToPrevFolder>", "将当前文件夹下的全部文件移动到上层目录中")
     vim.comment("<TC_SrcQuickViewAndTab>", "预览文件时,光标自动移到对侧窗口里")
     vim.comment("<TC_CreateFileShortcut>", "创建当前光标下文件的快捷方式")
     vim.comment("<TC_CreateFileShortcutToDesktop>", "创建当前光标下文件的快捷方式并发送到桌面")
     vim.comment("<TC_CreateFileShortcutToStartup>", "创建当前光标下文件的快捷方式并发送到启动文件里")
     vim.comment("<TC_FilterSearchFNsuffix_exe>", "在当前目录里快速过滤exe扩展名的文件")
     vim.comment("<TC_TwoFileExchangeName>", "两个文件互换文件名")
+    vim.comment("<TC_SelectCmd>", "选择命令来执行")
+    vim.comment("<Launch>", "打开TC并跳转到配置文件中的路径")
+    vim.comment("<TC_MarkFile>", "标记文件，将文件注释改成m")
+    vim.comment("<TC_UnMarkFile>", "取消文件标记，将文件注释清空")
+    vim.comment("<TC_ClearTitle>", "将TC标题栏字符串设置为空")
+    vim.comment("<TC_ReOpenTab>", "重新打开之前关闭的标签页")
+    vim.comment("<TC_OpenDirsInFile>", "将光标所在的文件内容中的文件夹在新标签页依次打开")
 
     GoSub, TCCOMMAND
 
@@ -254,6 +262,7 @@
     vim.map("gc", "<cm_CloseCurrentTab>", "TTOTAL_CMD")
     vim.map("gb", "<cm_OpenDirInNewTabOther>", "TTOTAL_CMD")
     vim.map("ge", "<cm_Exchange>", "TTOTAL_CMD")
+    vim.map("gr", "<TC_ReOpenTab>", "TTOTAL_CMD")
     vim.map("gw", "<cm_ExchangeWithTabs>", "TTOTAL_CMD")
     vim.map("g1", "<cm_SrcActivateTab1>", "TTOTAL_CMD")
     vim.map("g2", "<cm_SrcActivateTab2>", "TTOTAL_CMD")
@@ -338,7 +347,7 @@ TTOTAL_CMD_CheckMode()
         return False
     Ifinstring, ctrl, RichEdit20W1
         return False
-    Ifinstring, ctrl, %TCListBox% 
+    Ifinstring, ctrl, %TCListBox%
         return False
     return True
 }
@@ -381,10 +390,10 @@ return
         if Ac = -1
             Winactivate, AHK_ClASS TTOTAL_CMD
         else
-        Ifwinnotactive, AHK_CLASS TTOTAL_CMD
-            Winactivate, AHK_CLASS TTOTAL_CMD
-        else
-            Winminimize, AHK_CLASS TTOTAL_CMD
+            Ifwinnotactive, AHK_CLASS TTOTAL_CMD
+                Winactivate, AHK_CLASS TTOTAL_CMD
+            else
+                Winminimize, AHK_CLASS TTOTAL_CMD
     }
     else
     {
@@ -462,7 +471,7 @@ TC_azHistory()
             IniRead, history, %TCINI%, LeftHistory
 
         if RegExMatch(history, "RedirectSection=(.+)", HistoryRedirect)
-        { 
+        {
             StringReplace, HistoryRedirect1, HistoryRedirect1, `%COMMANDER_PATH`%, %TCPath%\..
             IniRead, history, %HistoryRedirect1%, LeftHistory
         }
@@ -528,7 +537,7 @@ TC_azHistory()
             value := 2127
         }
         name .= A_Tab "[&"  chr(idx+65) "]"
-        history_obj[idx] := name 
+        history_obj[idx] := name
         history_name_obj[name] := value
     }
     Menu, az, UseErrorLevel
@@ -1009,14 +1018,14 @@ NewFileOK()
         DstPath := A_Desktop
     NewFile := DstPath . "\" . NewFileName
     if FileExist(NewFile)
-    {   
+    {
         MsgBox, 4, 新建文件, 新建文件已存在，是否覆盖？
         IfMsgBox No
             return
     }
     if !FileExist(SrcPath)
         Run, fsutil file createnew "%NewFile%" 0, , Hide
-    else 
+    else
         FileCopy, %SrcPath%, %NewFile%, 1
 
     Gui, Destroy
@@ -1194,7 +1203,7 @@ TC_AlwayOnTop()
     if (ExStyle & 0x8)
         WinSet, AlwaysOnTop, off, ahk_class TTOTAL_CMD
     else
-        WinSet, AlwaysOnTop, on, ahk_class TTOTAL_CMD 
+        WinSet, AlwaysOnTop, on, ahk_class TTOTAL_CMD
 }
 
 ; LeftRight(){{{1
@@ -1426,7 +1435,7 @@ Totalcomander_select_tcdir(){
             SendPos(910)
         }
     return
-    
+
 ;使用外部查看器打开（alt+f3）
 <TC_OpenWithAlternateViewer>:
     send !{f3}
@@ -1542,11 +1551,23 @@ Return
     SendPos(2002)
 Return
 
-;<TC_MoveAllFileToPrevifolder>: >>将当前文件夹下的所有文件移动到上层目录中
-<TC_MoveAllFileToPrevifolder>:
+;<TC_MoveSelectedFilesToPrevFolder>: >>将当前文件夹下的选定文件移动到上层目录中
+<TC_MoveSelectedFilesToPrevFolder>:
     Send ^x
     SendPos(2002)
     Send ^v
+Return
+
+;<TC_MoveAllFilesToPrevFolder>: >>将当前文件夹下的全部文件移动到上层目录中
+; 时间控制不好可能会误删文件，慎用
+<TC_MoveAllFilesToPrevFolder>:
+    Send ^a
+    sleep 100
+    Send ^x
+    SendPos(2002)
+    Send ^v
+    sleep 500
+    Send {del}
 Return
 
 ;<TC_SrcQuickViewAndTab>: >>预览文件时,光标自动移到对侧窗口里
@@ -1628,6 +1649,7 @@ Return
     FileMove, %FirstName%.bak, %SecondName%
 Return
 
+; 未添加TC前缀，是因为以后可能用其他方式实现
 <Launch>:
     launch_dir := ini.config.launch_dir
     Run, %TCPath% %launch_dir%
@@ -1680,8 +1702,47 @@ return
     {
         GoSub, <%Clipboard%>
     }
+return
 
+<TC_ClearTitle>:
+    TC_SetTitle("", false)
+return
+
+; 自动设置的话显示效果滞后
+TC_SetTitle(Title := "", KeepVersion := true)
+{
+    if (KeepVersion)
+    {
+        WinGetTitle, OldTitle, ahk_class TTOTAL_CMD
+        StringMid, NewTitle, OldTitle, 1, 21  ;保留TC的版本号信息
+        WinSetTitle, ahk_class TTOTAL_CMD, , %NewTitle% - %Title%
+    }
+    else
+    {
+        WinSetTitle, ahk_class TTOTAL_CMD, , %Title%
+    }
+}
+
+<TC_ReOpenTab>:
+    GoSub, <cm_OpenNewTab>
+    GoSub, <cm_GotoPreviousDir>
+return
+
+<TC_OpenDirsInFile>:
+    OldClipboard := Clipboard
+    Clipboard := ""
+    GoSub, <cm_CopyFullNamesToClip>
+    ClipWait
+    FileRead, Contents, %Clipboard%
     Clipboard := OldClipboard
+    Loop, Parse, Contents, `n, `r
+    {
+        if FileExist(A_LoopField)
+        {
+            TC_OpenPath(A_LoopField, true)
+            Sleep, 100
+        }
+    }
 return
 
 ; ADD HERE
