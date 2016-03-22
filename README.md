@@ -21,9 +21,9 @@
 
 [API 列表](https://github.com/goreliu/vimdesktop/wiki/API%E5%88%97%E8%A1%A8)
 
-[更新历史](https://github.com/goreliu/vimdesktop/blob/master/doc/HISTORY.md)
+[更新历史](https://github.com/goreliu/vimdesktop/wiki/HISTORY)
 
-[TODO](https://github.com/goreliu/vimdesktop/blob/master/doc/TODO.md)
+[开发计划](https://github.com/goreliu/vimdesktop/wiki/TODO)
 
 ### VimDesktop 历史
 

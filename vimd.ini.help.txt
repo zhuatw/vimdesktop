@@ -147,6 +147,11 @@ Explorer=1
 ;<c-j>=run|notepad.exe
 ;<c-k>=key|^o
 
+;[Mintty]
+;set_class=mintty
+;set_file=mintty.exe
+;<esc>=<SwitchToEngIMEAndEsc>
+
 [TotalCommander_Config]
 ;TCPath: TotalCommander可执行文件路径--TC运行时，可被自动识别
 TCPath=C:\mine\app\totalcmd\TOTALCMD.EXE
@@ -191,6 +196,7 @@ OpenFileDialogExclude = password , 密码
 ; 用TC打开目录，[=normal]可选，默认为normal模式
 
 
+a=<cm_SelectAll>
 b=<cm_UnpackFiles>
 c=<cm_MkDir>
 e=<cm_edit>
@@ -218,7 +224,7 @@ u=<cm_CloseCurrentTab>
 <c-b>=<pgup>
 <c-d>=<cm_ClearAll>
 <c-f>=<pgdn>
-<c-g>=<cm_CopySrcPathToClip>
+<c-g>=<cm_SetAttrib>
 <c-h>=<left>
 <c-j>=<down>
 <c-k>=<up>
@@ -231,3 +237,4 @@ u=<cm_CloseCurrentTab>
 <=<TC_SelectCmd>
 ;"=<TC_MarkFile>
 ;_=<TC_UnMarkFile>
+;<esc>=<SwitchToEngIMEAndEsc>
