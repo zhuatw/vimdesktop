@@ -36,6 +36,7 @@
     vim.SetAction("<pgup>", "上一页")
     vim.SetAction("<pgdn>", "下一页")
     vim.SetAction("<enter>", "回车键")
+    vim.SetAction("<space>", "空格键")
     vim.SetAction("<backspace>", "退格键")
     vim.SetAction("<Pass>", "屏蔽按键")
     vim.SetAction("<Media_Next>", "播放下一首")
@@ -50,7 +51,7 @@
     vim.SetAction("<MouseLeft>", "向左移动鼠标")
     vim.SetAction("<MouseRight>", "向右移动鼠标")
     vim.SetAction("<SearchInWeb>", "在网络搜索剪切板内容")
-    vim.SetAction("<GKey>", "GKey全局快捷操作")
+    vim.SetAction("<RunZ>", "打开RunZ工具")
     vim.SetAction("<Test>", "测试")
 
 
@@ -186,6 +187,9 @@ return
 return
 <enter>:
     send, {enter}
+return
+<space>:
+    send, {space}
 return
 <backspace>:
     send, {backspace}
@@ -902,8 +906,15 @@ ShowHelp()
     showToolTipStatus := !showToolTipStatus
 return
 
-<GKey>:
-    Run, %A_ScriptDir%\tools\GKey.ahk
+<RunZ>:
+    if (FileExist(A_ScriptDir "\vimd.exe"))
+    {
+        Run, %A_ScriptDir%\vimd.exe "%A_ScriptDir%\tools\RunZ.ahk"
+    }
+    else
+    {
+        Run, %A_ScriptDir%\tools\RunZ.ahk
+    }
 return
 
 <ToggleCapsLock>:

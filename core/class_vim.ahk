@@ -1,5 +1,6 @@
-﻿; 初始化class_Vim
+﻿global __vimLastAction
 
+; 初始化class_Vim
 vim_Init:
     #UseHook
     SetKeyDelay, -1
@@ -52,7 +53,7 @@ return
 Class_vim()
 {
     global __v
-    GoSub, Vim_Init
+    GoSub, vim_Init
     __v := v := new __vim
     __v.LoadPlugin("Internal")
     return v
@@ -60,7 +61,6 @@ Class_vim()
 
 GetLastAction()
 {
-    global __vimLastAction
     return __vimLastAction
 }
 
@@ -257,7 +257,7 @@ Class __vim
     GetMode(winName = "")
     {
         winObj := This.GetWin(winName)
-        return winObj.modeList[winobj.ExistMode()]
+        return winObj.modeList[winObj.ExistMode()]
     }
 
     ; GetInputState {{{2
@@ -371,7 +371,7 @@ Class __vim
         keyName := RegExReplace(keyName, "i)<nowait>", "", nowait)
         keyName := RegExReplace(keyName, "i)<super>", "", super)
         newkeyName := keyName
-        index := 0
+        keyIndex := 0
         Loop
         {
             if not strlen(newkeyName)
@@ -418,7 +418,7 @@ Class __vim
             {
                 winObj.SuperKeyList[key] := super
                 winObj.KeyList[key] := true
-                Index++
+                keyIndex++
             }
         }
 
@@ -445,6 +445,8 @@ Class __vim
     ; Control(bold, winName) {{{2
     Control(bold, winName = "", all=false)
     {
+        local class
+
         winObj := this.GetWin(winName)
         class := winObj.Class
         filepath := winObj.filepath
@@ -475,27 +477,27 @@ Class __vim
     Copy(winName1, winName2, class, filepath = "", title = "")
     {
         this.debug.Add("Copy>> "winName1 "`t"  winName2 "`t" class)
-        w1 := This.GetWin(winName1)
-        w2 := this.SetWin(winName2, class, filepath, title)
-        w2.class := class
-        w2.filepath := filepath
-        w2.title := title
-        w2.KeyList := w1.KeyList
-        w2.SuperKeyList := w1.SuperKeyList
-        w2.modeList  := w1.modeList
-        w2.mode      := w1.mode
-        w2.LastKey   := w1.LastKey
-        w2.KeyTemp   := w1.KeyTemp
-        w2.MaxCount  := w1.MaxCount
-        w2.Count     := w1.Count
-        w2.TimeOut   := w1.TimeOut
-        w2.Info      := w1.Info
-        w2.BeforeActionDoFunc := w1.BeforeActionDoFunc
-        w2.AfterActionDoFunc  := w1.AfterActionDoFunc
-        w2.ShowInfoFunc := w1.ShowInfoFunc
-        w2.HideInfoFunc := w1.HideInfoFunc
+        win1 := This.GetWin(winName1)
+        win2 := this.SetWin(winName2, class, filepath, title)
+        win2.class := class
+        win2.filepath := filepath
+        win2.title := title
+        win2.KeyList := win1.KeyList
+        win2.SuperKeyList := win1.SuperKeyList
+        win2.modeList  := win1.modeList
+        win2.mode      := win1.mode
+        win2.LastKey   := win1.LastKey
+        win2.KeyTemp   := win1.KeyTemp
+        win2.MaxCount  := win1.MaxCount
+        win2.Count     := win1.Count
+        win2.TimeOut   := win1.TimeOut
+        win2.Info      := win1.Info
+        win2.BeforeActionDoFunc := win1.BeforeActionDoFunc
+        win2.AfterActionDoFunc  := win1.AfterActionDoFunc
+        win2.ShowInfoFunc := win1.ShowInfoFunc
+        win2.HideInfoFunc := win1.HideInfoFunc
         this.Control(Bold := true, winName2, all := true)
-        return w2
+        return win2
     }
 
     ; CopyMode(win, mode, to) {{{2
@@ -545,12 +547,13 @@ Class __vim
                 return r
         }
         else
-            if winobj.count
-                return winobj.count
+            if winObj.count
+                return winObj.count
     }
 
     ; Clear() {{{2
-    Clear(winName = "") {
+    Clear(winName = "")
+    {
         winObj := This.GetWin(winName)
         winObj.KeyTemp := ""
         winObj.Count := 0
@@ -559,13 +562,13 @@ Class __vim
     ; Key() {{{2
     Key()
     {
-        Global __vimLastAction
         ; 获取winName
         winName := this.CheckWin()
         ; 获取当前的热键
         k := this.CheckCapsLock(this.Convert2VIM(A_ThisHotkey))
         ; 如果winName在排除窗口中，直接发送热键
-        if this.ExcludeWinList[winName] {
+        if this.ExcludeWinList[winName]
+        {
             Send, % this.Convert2AHK(k, ToSend := true)
             return
         }
@@ -764,6 +767,8 @@ Class __vim
             return "<RA-" this.Upper(m1) ">"
         if RegExMatch(key, "i)^lwin\s&\s(.*)", m) or RegExMatch(key, "^#(.*)", m)
             return "<W-" this.Upper(m1) ">"
+        if RegExMatch(key, "i)^space\s&\s(.*)", m)
+            return "<SP-" this.Upper(m1) ">"
         if RegExMatch(key, "i)^alt$")
             return "<Alt>"
         if RegExMatch(key, "i)^ctrl$")
@@ -828,6 +833,8 @@ Class __vim
                 return ToSend ? ">!" this.CheckToSend(m1) : ">!" m1
             if RegExMatch(key, "i)^w\-(.*)", m)
                 return ToSend ? "#" this.CheckToSend(m1) : "#" m1
+            if RegExMatch(key, "i)^SP\-(.*)", m)
+                return ToSend ? "{space}" this.CheckToSend(m1) : "space & " m1
         }
         else
             return key
@@ -1080,8 +1087,8 @@ Class __Action
         {
             if this.Type = 0
             {
-                if IsLabel(l := this.Name)
-                    GoSub, %l%
+                if IsLabel(label := this.Name)
+                    GoSub, %label%
             }
             else if this.Type = 1
             {
