@@ -116,6 +116,12 @@ VimDConfig_keymap_loadwinlist()
         {
             continue
         }
+
+        ; Convert class name TTOTAL_CMD to plugin name TotalCommander
+        if (win = "TTOTAL_CMD")
+        {
+            win := "TotalCommander"
+        }
         list .= "|" win
     }
     GuiControl, , ListBox1, %list%
@@ -138,7 +144,7 @@ VimDConfig_keymap_loadmodelist(win = "")
         winObj := vim.GetWin()
     Else
         winObj := vim.GetWin(win)
-    for mode, obj in winobj.modeList
+    for mode, obj in winObj.modeList
         mlist .= "|" mode
     GuiControl, , ListBox2, %mlist%
     return win
@@ -148,10 +154,18 @@ VimDConfig_keymap_loadhotkey:
     GUI, VimDConfig_keymap:Default
     ControlGet, win, Choice, , ListBox1
     win := RegExMatch(win, "^全局$") ? "" : win
+
+    ; Convert plugin name TotalCommander to class name TTOTAL_CMD
+    if (win = "TotalCommander")
+    {
+        win := "TTOTAL_CMD"
+    }
+
     ControlGet, mode, Choice, , ListBox2
     VimDConfig_keymap_loadhotkey(win, mode)
 return
 
+/*
 ; 有Bug，暂时搁置
 ; 双击进入代码失效
 ; 插件名和Win名不对应的情况显示不出来
@@ -214,6 +228,7 @@ VimDConfig_keymap_loadhotkey_new(win, mode = "")
     }
     return
 }
+*/
 
 VimDConfig_keymap_loadhotkey(win, mode = "")
 {
@@ -265,11 +280,11 @@ return
 
 SearchFileForEdit(Action, Desc, EditKeyMapping)
 {
-    if (Action = "key" || Action = "run" || Action = "dir" || EditKeyMapping)
+    IsUserCmd := RegExMatch(Action, "^(run|key|dir|tccmd|wshkey)$")
+    if (IsUserCmd || EditKeyMapping)
     {
         SearchLine := "=" Action
-
-        if (Action = "key" || Action = "run" || Action = "dir")
+        if (IsUserCmd)
         {
             SearchLine := Action "|" Desc
         }

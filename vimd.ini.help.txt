@@ -1,13 +1,9 @@
-; [使用说明]
+﻿; [使用说明]
 ; 1. 如果当前目录无vimd.ini文件，VimDesktop会将此文件复制为vimd.ini
 ; 2. 根据分号 ; 之后的提示内容进行相应修改
 ;
 ; [自定义配置用法]
 ; 在当前目录添加 custom.ahk文件，内容如下：
-;
-; ;;;
-; 需要每次执行的代码
-; return
 ;
 ; <MyLabel1>:
 ;     对应功能
@@ -26,8 +22,6 @@
 default_enable_show_info=1
 ; 配置编辑器，请填写完整路径，如果填写的是 notepad ，将使用 notepad2 的参数
 editor=
-; Win + n 进入的 Launch 目录
-launch_dir=
 ; 打印调试日志
 enable_log=0
 ; 打开调试窗口
@@ -46,9 +40,9 @@ vim
 ; 激活TC作为文件选择框，再次按下该快捷键可执行文件打开操作
 <w-o>=<TC_OpenTCDialog>
 <w-c>=run|explorer
-<w-j>=<GKey>
+<w-j>=<RunZ>
+;<a-space>=<RunZ>
 <w-`>=run|control
-<w-n>=<Launch>
 ;<w-f>=run|firefox
 ;<w-w>=run|mintty -e ~/.bin/tmux_starter
 ;<w-a>=run|c:\mine\app\foobar2000\foobar2000.exe
@@ -58,64 +52,64 @@ vim
 
 ; win剩余按键 n u v ' , .  / [ ] \ enter -
 
-<la-a>=key|^a
+;<la-a>=key|^a
 ; 向左移动一个单词
-<la-b>=key|^{left}
+;<la-b>=key|^{left}
 ; 复制
-<la-c>=key|^{insert}
-<la-d>=<WindowRestore>
-<la-e>=<SearchInWeb>
-<la-f>=<FullScreen>
+;<la-c>=key|^{insert}
+;<la-d>=<WindowRestore>
+;<la-e>=<SearchInWeb>
+;<la-f>=<FullScreen>
 ; 第一行
-<la-g>=key|^{home}
-<la-h>=<left>
-<la-i>=<home>
-<la-j>=<down>
-<la-k>=<up>
-<la-l>=<right>
-<la-m>=<WindowMax>
-<la-n>=<pgdn>
-<la-o>=<end>
-<la-p>=<pgup>
-<la-q>=key|!{f4}
+;<la-g>=key|^{home}
+;<la-h>=<left>
+;<la-i>=<home>
+;<la-j>=<down>
+;<la-k>=<up>
+;<la-l>=<right>
+;<la-m>=<WindowMax>
+;<la-n>=<pgdn>
+;<la-o>=<end>
+;<la-p>=<pgup>
+;<la-q>=key|!{f4}
 ; 修改文件扩展名之外的部分
-<la-r>=key|{f2}{f2}
-<la-s>=key|^{tab}
+;<la-r>=key|{f2}{f2}
+;<la-s>=key|^{tab}
 ; 最后一行
-<la-t>=key|^{end}
-<la-u>=<CloseTab>
+;<la-t>=key|^{end}
+;<la-u>=<CloseTab>
 ; 粘贴
-<la-v>=key|+{insert}
+;<la-v>=key|+{insert}
 ; 向右移动一个单词
-<la-w>=key|^{right}
-<la-x>=key|^x
-<la-y>=key|^y
-<la-z>=key|^z
-<la-1>=key|{Media_Play_Pause}
-<la-2>=key|{Media_Next}
-<la-3>=key|{Volume_Down}
-<la-4>=key|{Volume_Up}
-<la-5>=key|{Media_Prev}
-<la-6>=key|{Volume_Mute}
-<la-up>=<MouseUp>
-<la-down>=<MouseDown>
-<la-left>=<MouseLeft>
-<la-right>=<MouseRight>
-<la-backspace>=key|^{backspace}
-<la-,>=<WindowMin>
-<la-.>=key|{del}
-<la-;>=key|{Enter}
-<la-`>=<ToggleCapsLock>
-<la-'>=<backspace>
-<la-[>=key|(
-<la-]>=key|)
-<la-/>=key|@
-<la-\>=key|^{del}
-<la-->=<vc_keymap>
+;<la-w>=key|^{right}
+;<la-x>=key|^x
+;<la-y>=key|^y
+;<la-z>=key|^z
+;<la-1>=key|{Media_Play_Pause}
+;<la-2>=key|{Media_Next}
+;<la-3>=key|{Volume_Down}
+;<la-4>=key|{Volume_Up}
+;<la-5>=key|{Media_Prev}
+;<la-6>=key|{Volume_Mute}
+;<la-up>=<MouseUp>
+;<la-down>=<MouseDown>
+;<la-left>=<MouseLeft>
+;<la-right>=<MouseRight>
+;<la-backspace>=key|^{backspace}
+;<la-,>=<WindowMin>
+;<la-.>=key|{del}
+;<la-;>=key|{Enter}
+;<la-`>=<ToggleCapsLock>
+;<la-'>=<backspace>
+;<la-[>=key|(
+;<la-]>=key|)
+;<la-/>=key|@
+;<la-\>=key|^{del}
+;<la-->=<vc_keymap>
 
 ; la剩余按键 7-0
 
-; 启用/禁用 插件，默认禁用
+; 启用（1）/禁用（0） 插件，默认禁用
 [plugins]
 General=1
 TotalCommander=1
@@ -187,6 +181,9 @@ OpenFileDialogExclude = password , 密码
 ; <c-f>：ctrl + f
 ; <a-f>：alt + f
 ; <la-f>：lalt + f
+; <sp-f>：space + f
+; 使用<sp->时避免空格不可用，加下一行
+; <space>=<space>
 ;
 ; <c-j>=run|notepad.exe
 ; 运行命令，[=normal]可选，默认为normal模式
@@ -194,6 +191,10 @@ OpenFileDialogExclude = password , 密码
 ; 映射按键，[=normal]可选，默认为normal模式
 ; <c-l>=dir|c:\test
 ; 用TC打开目录，[=normal]可选，默认为normal模式
+; <c-m>=tccmd|em_test
+; 在TC的命令行运行命令，[=normal]可选，默认为normal模式
+; <c-n>=wshkey|xx
+; 映射按键，使用WScript.Shell的SendKeys()调用，[=normal]可选，默认为normal模式
 
 
 a=<cm_SelectAll>
@@ -201,7 +202,7 @@ b=<cm_UnpackFiles>
 c=<cm_MkDir>
 e=<cm_edit>
 h=<TC_GoToParentEx>
-i=<TC_CreateNewFile>
+i=<TC_CreateNewFileNewStyle>
 l=<TC_SuperReturn>
 o=<cm_ContextMenu>
 p=<cm_PackFiles>
@@ -234,7 +235,8 @@ u=<cm_CloseCurrentTab>
 <c-q>=<TC_SelectCmd>
 <c-s>=<cm_CountDirContent>
 <c-y>=<cm_CopyFileDetailsToClip>
-<=<TC_SelectCmd>
 ;"=<TC_MarkFile>
 ;_=<TC_UnMarkFile>
 ;<esc>=<SwitchToEngIMEAndEsc>
+;zh=<TC_Toggle_50_100Percent>
+;zz=<TC_Toggle_50_100Percent_V>
