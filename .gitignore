@@ -28,5 +28,4 @@ Session.vim
 *~
 *.exe
 Private
-SearchFileList.txt
-RunZ.ini
+doc/wiki
