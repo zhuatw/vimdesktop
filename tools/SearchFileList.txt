@@ -1,0 +1,150 @@
+﻿file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Audacity.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\FreeFileSync.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Security Essentials.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\RealTimeSync.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Sidebar.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\SumatraPDF.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Fax and Scan.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Media Player.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\XPS Viewer.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Bluetooth File Transfer Wizard.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Calculator.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\displayswitch.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Math Input Panel.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Mobility Center.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\NetworkProjection.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Paint.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Remote Desktop Connection.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Snipping Tool.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Sound Recorder.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Sticky Notes.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Sync Center.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Welcome Center.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Wordpad.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Accessibility\Speech Recognition.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Character Map.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\dfrgui.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Disk Cleanup.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Resource Monitor.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\System Information.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\System Restore.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Task Scheduler.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Windows Easy Transfer Reports.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Windows Easy Transfer.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Tablet PC\ShapeCollector.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Tablet PC\TabTip.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Tablet PC\Windows Journal.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Windows PowerShell\Windows PowerShell (x86).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Windows PowerShell\Windows PowerShell ISE (x86).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Windows PowerShell\Windows PowerShell ISE.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Windows PowerShell\Windows PowerShell.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Component Services.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Computer Management.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Data Sources (ODBC).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Event Viewer.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\iSCSI Initiator.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Memory Diagnostics Tool.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Performance Monitor.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Print Management.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Security Configuration Management.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\services.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\System Configuration.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Task Scheduler.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Windows Firewall with Advanced Security.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Windows PowerShell Modules.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\Active Window Info (Window Spy).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\AutoHotkey Help File.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\AutoHotkey Setup.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\AutoHotkey.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\Convert .ahk to .exe.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoHotkey\Website.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\CAXA\CAXA电子图板2011 - 机械版\CAXA电子图板2011 - 机械版.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\CAXA\CAXA电子图板2011 - 机械版\网络授权配置.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\freeime\Freeime Folder.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\freeime\Readme.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\freeime\Uninstall.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\freeime\WebHome.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Games\FreeCell.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Games\GameExplorer.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Games\Hearts.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Games\Solitaire.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Games\Spider Solitaire.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\Git Bash.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\Git CMD.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\Git GUI.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maintenance\Backup and Restore Center.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maintenance\Create Recovery Disc.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maintenance\Remote Assistance.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Access 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Excel 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office Excel 2003.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office PowerPoint 2003.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office Word 2003.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft PowerPoint 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Publisher 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft SharePoint Workspace 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Word 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 2010 工具\Microsoft Office 2010 上载中心.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 2010 工具\Microsoft Office 2010 语言首选项.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 2010 工具\Microsoft Office Picture Manager.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 2010 工具\Microsoft 剪辑管理器.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 2010 工具\VBA 工程的数字证书.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 工具\Microsoft Office 2003 用户设置保存向导.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 工具\Microsoft Office Document Imaging.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 工具\Microsoft Office 应用程序恢复.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office\Microsoft Office 工具\Microsoft 剪辑管理器.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 2.7\IDLE (Python GUI).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 2.7\Module Docs.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 2.7\Python (command line).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 2.7\Python Manuals.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 2.7\Uninstall Python.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.4\IDLE (Python 3.4 GUI - 32 bit).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.4\Python 3.4 (command line - 32 bit).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.4\Python 3.4 Docs Server (pydoc - 32 bit).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.4\Python 3.4 Manuals.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.4\Uninstall Python 3.4 (32 bit).lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\SharePoint\Microsoft SharePoint Workspace 2010.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Total Commander\Total Commander Help.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Total Commander\Total Commander.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Total Commander\Uninstall or Repair Total Commander.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\gVim Diff.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\gVim Easy.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\gVim Read-only.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\gVim.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Help.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Uninstall.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Vim Diff.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Vim Read-only.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Vim tutor.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Vim 7.4\Vim.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WinRAR\WinRAR 中文帮助.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WinRAR\WinRAR.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WinRAR\控制台 RAR 中文手册.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\为知笔记\为知笔记 Wiz.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\光大证券金阳光智胜版\光大证券金阳光智胜版.lnk
+file | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\阿里旺旺\阿里旺旺.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Internet Explorer.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\360安全中心\360云盘\360云盘.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Command Prompt.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Run.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Windows Explorer.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Accessibility\Ease of Access.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Accessibility\Magnify.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Accessibility\Narrator.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\Accessibility\On-Screen Keyboard.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\computer.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Control Panel.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Internet Explorer (No Add-ons).lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\System Tools\Private Character Editor.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Maintenance\Help.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\run.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\WinRAR\WinRAR 中文帮助.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\WinRAR\WinRAR.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\WinRAR\控制台 RAR 中文手册.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\有道\有道词典\启动有道词典.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\有道\有道词典\有道单词本.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\猎豹安全浏览器\修复浏览器.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\猎豹安全浏览器\猎豹安全浏览器.lnk
+file | C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\百度云\百度云管家.lnk
