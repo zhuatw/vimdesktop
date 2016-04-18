@@ -27,6 +27,5 @@ Session.vim
 .netrwhist
 *~
 *.exe
-vimd.ini
 Private
 doc/wiki
