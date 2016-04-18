@@ -16,6 +16,7 @@
     vim.SetAction("<WindowMoveRight>", "窗口移动到右侧")
     vim.SetAction("<WindowMoveCenter>", "窗口移动到中间")
     vim.SetAction("<WindowMax>", "最大化窗口")
+    vim.SetAction("<WindowMaxNoTitle>", "最大化窗口，并且隐藏标题栏")
     vim.SetAction("<WindowMin>", "最小化窗口")
     vim.SetAction("<WindowRestore>", "还原当前窗口")
     vim.SetAction("<FullScreen>", "全屏当前程序")
@@ -51,6 +52,8 @@
     vim.SetAction("<MouseLeft>", "向左移动鼠标")
     vim.SetAction("<MouseRight>", "向右移动鼠标")
     vim.SetAction("<SearchInWeb>", "在网络搜索剪切板内容")
+    vim.SetAction("<PrintScreenAndSave>", "截图并保存")
+    vim.SetAction("<RunZ>", "运行 RunZ")
     vim.SetAction("<Test>", "测试")
 
 
@@ -223,6 +226,10 @@ Return
 return
 <WindowMax>:
     WinMaximize, A
+return
+<WindowMaxNoTitle>:
+    WinMaximize, A
+    WinSet, Style, -0xc00000, A
 return
 <WindowMin>:
     WinMinimize, A
@@ -933,9 +940,68 @@ return
     Run, https://www.baidu.com/s?wd=%clipboard%
 return
 
-<Test>:
-    Msgbox, 测试
+<PrintScreenAndSave>:
+    if (RegExMatch(A_ThisHotkey, "i)!PrintScreen"))
+    {
+        Send, !{PrintScreen}
+    }
+    else
+    {
+        Send, {PrintScreen}
+    }
+
+    Run, mspaint
+    Loop, 5
+    {
+        if (WinActive("ahk_class MSPaintApp"))
+        {
+            Send, ^v^s
+            break
+        }
+        sleep 100
+    }
 return
+
+<Test>:
+    MsgBox, 测试
+return
+
+TestFunction(arg)
+{
+    MsgBox, 参数：%arg%
+}
+
+/*
+<PrintScreenWindowAndSave>:
+    WinGetPos x, y, w, h, A
+    ScreenSnapshot(A_Temp "\vimd.tmp.png", x "|" y "|" w "|" h "|")
+    Fileselectfile, selectedFile, s16, 截图.png, 另存为, PNG图片(*.png)
+
+    if (selectedFile == "")
+    {
+        return
+    }
+
+    if (!RegExMatch(selectedFile,"i)\.png"))
+    {
+        selectedFile .= ".png"
+    }
+
+    FileMove, % A_Temp "\vimd.tmp.png", % selectedFile, 1
+
+return
+
+; ScreenSnapshot("FullScreen.png")
+; ScreenSnapshot("Area_xywh.png", "10|20|200|200")
+ScreenSnapshot(filename, area := 0)
+{
+    pToken := Gdip_Startup()
+    pBitmap := Gdip_BitmapFromScreen(area)
+    Gdip_SaveBitmapToFile(pBitmap, filename)
+    Gdip_DisposeImage(pBitmap)
+    Gdip_Shutdown(pToken)
+}
+*/
 
 SwitchIME(dwLayout)
 {
@@ -956,3 +1022,32 @@ return
     SwitchIME(0x04090409) ; 英语(美国) 美式键盘
     SwitchIME(0x08040804) ; 中文(中国) 简体中文-美式键盘
 return
+
+<RunZ>:
+    RunZPath := A_ScriptDir "\..\RunZ\RunZ.ahk"
+    if (ini.config.runz_dir != "")
+    {
+        RunZPath := ini.config.runz_dir "\RunZ.ahk"
+    }
+
+    if (!FileExist(RunZPath))
+    {
+        return
+    }
+
+    if (FileExist(A_ScriptDir "\vimd.exe"))
+    {
+        Run, %A_ScriptDir%\vimd.exe "%RunZPath%"
+    }
+    else
+    {
+        Run, "%RunZPath%"
+    }
+return
+
+ClickContextMenu(key)
+{
+    Send, {AppsKey}
+    WinWait, ahk_class #32768
+    Send, %key%
+}

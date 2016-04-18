@@ -1,23 +1,27 @@
 ﻿VimDConfig:
     vim.SetPlugin("VimDConfig", "Array", "0.1", "VimDesktop的配置界面")
-    vim.SetAction("<vc_plugin>", "显示 VimDesktop 插件信息")
-    vim.SetAction("<vc_keymap>", "显示 VimDesktop 热键信息")
+    vim.SetAction("<VimDConfig_Plugin>", "显示 VimDesktop 插件信息")
+    vim.SetAction("<VimDConfig_Keymap>", "显示 VimDesktop 热键信息")
+    vim.SetAction("<VimDConfig_EditConfig>", "打开 VimDesktop 配置文件")
 return
 
-<vc_plugin>:
+<VimDConfig_Plugin>:
 {
     GUI, VimDConfig_plugin:Destroy
     GUI, VimDConfig_plugin:Default
     GUI, VimDConfig_plugin:Font, s10, Microsoft YaHei
-    GUI, VimDConfig_plugin:Add, ListView, x10 y10 w150 h400 grid altsubmit gVimDConfig_LoadActions, 插件
+
+    GUI, VimDConfig_plugin:Add, GroupBox, x10 y10 w170 h440, 插件 &P
+    GUI, VimDConfig_plugin:Add, ListView, x20 y35 w150 h400 grid altsubmit gVimDConfig_LoadActions, 名称
     for plugin, obj in vim.PluginList
         LV_Add("", plugin)
-    GUI, VimDConfig_plugin:Add, ListView, glistview x170 y10 w650 h400 grid altsubmit, 序号|动作|描述（双击进入文件）
 
-    GUI, VimDConfig_plugin:Font, s12, Microsoft YaHei
-    GUI, VimDConfig_plugin:Add, Text, x180 h25, 搜索：
-    GUI, VimDConfig_plugin:Font, s10, Microsoft YaHei
-    GUI, VimDConfig_plugin:Add, Edit, gsearch_plugin v_search x+10 w120 h25
+    GUI, VimDConfig_plugin:Add, GroupBox, x10 y460 w170 h70, 过滤 &F
+    GUI, VimDConfig_plugin:Add, Edit, x20 y490 gsearch_plugin v_search
+
+    GUI, VimDConfig_plugin:Add, GroupBox, x190 y10 w650 h520, 动作 &A
+    GUI, VimDConfig_plugin:Add, ListView, glistview x200 y35 w630 h482 grid altsubmit, 序号|动作|描述（双击进入文件）
+
 
     LV_ModifyCol(1, "center")
     LV_ModifyCol(2, "left 250")
@@ -57,36 +61,26 @@ VimDConfig_LoadActions:
     return
 }
 
-<vc_keymap>:
+<VimDConfig_Keymap>:
 {
     menu, VimDConfig_keymap_menu, add
-    ;menu, VimDConfig_keymap_menu, deleteall
     menu, VimDConfig_keymap_menu, add, &Exit, VimDConfig_keymap_exit
 
     GUI, VimDConfig_keymap:Destroy
     GUI, VimDConfig_keymap:Default
     GUI, VimDConfig_keymap:Font, s10, Microsoft YaHei
 
-    GUI, VimDConfig_keymap:Add, GroupBox, x10 y10 w300 h270, 窗口(&Q)
-    GUI, VimDConfig_keymap:Add, ListBox, x20 y36 w180 R12 center gVimDConfig_keymap_loadmodelist
+    GUI, VimDConfig_keymap:Add, GroupBox, x10 y10 w200 h269, 插件 &P
+    GUI, VimDConfig_keymap:Add, ListBox, x20 y35 w180 R12 center gVimDConfig_keymap_loadmodelist
 
-    GUI, VimDConfig_keymap:Add, GroupBox, x10 y290  w200 h140, 模式(&M)
-    GUI, VimDConfig_keymap:Add, ListBox, x20 y316  w180 R5 center gVimDConfig_keymap_loadhotkey
+    GUI, VimDConfig_keymap:Add, GroupBox, x10 y290 w200 h135, 模式 &M
+    GUI, VimDConfig_keymap:Add, ListBox, x20 y315 w180 R5 center gVimDConfig_keymap_loadhotkey
 
-    GUI, VimDConfig_keymap:Add, GroupBox, x225 y10 w650 h420, 热键定义（双击进入对应文件，右键双击修改键映射）(&V)
-    GUI, VimDConfig_keymap:Add, Listview, glistview x235 y36 w630 h380 grid, 热键|动作|描述
-    ;GUI, VimDConfig_keymap:Add, Listview, glistview x235 y36 w630 h380 grid, 序号|热键|动作|描述
-    GUI, VimDConfig_keymap:Font, s12, Microsoft YaHei
-    GUI, VimDConfig_keymap:Add, Text, x230 h25, 搜索：
-    GUI, VimDConfig_keymap:Font, s10, Microsoft YaHei
-    GUI, VimDConfig_keymap:Add, Edit, gsearch_keymap v_search x+10 w120 h25
+    GUI, VimDConfig_keymap:Add, GroupBox, x10 y435 w200 h61, 过滤 &F
+    GUI, VimDConfig_keymap:Add, Edit, gsearch_keymap v_search x20 y460 w180 h25
 
-    /*
-    LV_ModifyCol(1, "left 50")
-    LV_ModifyCol(2, "left 100")
-    LV_ModifyCol(3, "left 250")
-    LV_ModifyCol(4, "left 400")
-    */
+    GUI, VimDConfig_keymap:Add, GroupBox, x225 y10 w650 h486, 映射 &K
+    GUI, VimDConfig_keymap:Add, Listview, glistview x235 y36 w630 h450 grid, 热键|动作（双击定位，右键双击编辑）|描述
 
     LV_ModifyCol(1, "left 100")
     LV_ModifyCol(2, "left 250")
@@ -96,8 +90,13 @@ VimDConfig_LoadActions:
     VimDConfig_keymap_loadhotkey(VimDConfig_keymap_loadmodelist(thiswin))
 
     GUI, VimDConfig_keymap:show
+    ControlFocus, Edit1, A
     return
 }
+
+<VimDConfig_EditConfig>:
+    Run, %A_ScriptDir%\vimd.ini
+return
 
 VimDConfig_keymap_exit:
 {
@@ -165,71 +164,6 @@ VimDConfig_keymap_loadhotkey:
     VimDConfig_keymap_loadhotkey(win, mode)
 return
 
-/*
-; 有Bug，暂时搁置
-; 双击进入代码失效
-; 插件名和Win名不对应的情况显示不出来
-VimDConfig_keymap_loadhotkey_new(win, mode = "")
-{
-    global vim
-    global current_keymap := ""
-    if StrLen(mode)
-    {
-        winObj  := vim.GetWin(win)
-        modeobj := winObj.modeList[mode]
-    }
-    else
-        modeobj := vim.GetMode(win)
-    Gui, VimDConfig_keymap:Default
-    idx := 1
-    LV_Delete()
-
-    for key, i in modeobj.keymapList
-    {
-        if (vim.GetAction(i).Type = 1)
-        {
-            ActionDescList := vim.GetAction(i).Comment
-            actionDesc := StrSplit(%ActionDescList%[key], "|")
-            current_keymap .= Key "`t" actionDesc[1]  "`n"
-        }
-        else
-        {
-            current_keymap .= Key "`t" i  "`n"
-        }
-    }
-
-    Clipboard := current_keymap
-    for action, type in vim.ActionFromPlugin
-    {
-        if type = %win%
-        {
-            Desc := vim.GetAction(action)
-            if InStr(current_keymap, action)
-            {
-                reg:="(.*)\t" . action
-                Loop, Parse, current_keymap, `n, `r
-                {
-                    if RegExMatch(A_LoopField, reg,m)
-                    {
-                        LV_Add("", idx, m1 ,action, Desc.Comment)
-                        break
-                    }
-                    else
-                        continue
-                }
-                idx++
-            }
-            else
-            {
-                LV_Add("", idx, "无" ,action, Desc.Comment)
-                idx++
-            }
-        }
-    }
-    return
-}
-*/
-
 VimDConfig_keymap_loadhotkey(win, mode = "")
 {
     global vim
@@ -284,7 +218,7 @@ SearchFileForEdit(Action, Desc, EditKeyMapping)
     if (IsUserCmd || EditKeyMapping)
     {
         SearchLine := "=" Action
-        if (IsUserCmd)
+        if (IsUserCmd || Action == "function")
         {
             SearchLine := Action "|" Desc
         }
@@ -303,11 +237,16 @@ SearchFileForEdit(Action, Desc, EditKeyMapping)
     }
 
     label := Action ":"
+    if (Action == "function")
+    {
+        label := Desc
+    }
+
     Loop, %A_ScriptDir%\plugins\*.ahk, , 1
     {
         Loop, Read, %A_LoopFileFullPath%
         {
-            if (InStr(A_LoopReadLine, label) = 1)
+            if (InStr(A_LoopReadLine, label) == 1)
             {
                 EditFile(A_LoopFileFullPath, A_Index)
                 return
